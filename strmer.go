@@ -69,6 +69,13 @@ func (strmDriver *internalStrmer) Strm(src <-chan []interface{}, dst chan<- []in
 
 				columnMapping[columnName] = ii
 			}
+
+			newRow := make([]interface{}, len(wantedColumns))
+			for ii, wantedColumn := range wantedColumns {
+				newRow[ii] = wantedColumn
+			}
+			dst <- newRow
+
 		} else {
 			newRow := make([]interface{}, len(wantedColumns))
 			for ii, wantedColumn := range wantedColumns {
